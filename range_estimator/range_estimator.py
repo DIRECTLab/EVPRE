@@ -12,6 +12,7 @@ class RangeEstimator:
         self.google_maps_key = config.google_maps_key
         self.distance = config.distance
 
+        # create an instance of the graph
         self.create_graph()
 
 
