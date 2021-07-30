@@ -4,4 +4,5 @@ from RangeEstimator import RangeEstimator
 from config import Config
 
 range_estimator = RangeEstimator(Config())
-range_estimator.display_map()
+graph = range_estimator.get_dataframe_from_graph()
+print(graph[1].head())
