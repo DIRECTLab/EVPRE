@@ -1,6 +1,6 @@
 import sys
 sys.path.append("range_estimator")
-from RangeEstimator import RangeEstimator
+from range_estimator import RangeEstimator
 from config import Config
 
 range_estimator = RangeEstimator(Config())
