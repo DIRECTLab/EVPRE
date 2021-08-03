@@ -5,7 +5,7 @@ import numpy as np
 from ipyleaflet import *
 from shapely.geometry import LineString, mapping
 
-class RangeEstimator:
+class RouteEstimator:
 
     def __init__(self, config):
         self.starting_coord = config.starting_coord
