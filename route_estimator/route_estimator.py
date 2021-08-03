@@ -11,6 +11,7 @@ class RouteEstimator:
         self.starting_coord = config.starting_coord
         self.google_maps_key = config.google_maps_key
         self.distance = config.distance
+        self.edge_weight = config.default_edge_weight
 
         # create an instance of the graph
         self.create_graph()
@@ -66,7 +67,7 @@ class RouteEstimator:
         event_owner = event['owner']
         event_owner.nearest_node = ox.get_nearest_node(self.graph, event_owner.location)
         marker.neares_node = ox.get_nearest_node(self.graph, marker.location)
-        shortest_path = nx.bellman_ford_path(self.graph, event_owner.nearest_node, marker.neares_node, weight='length')
+        shortest_path = nx.bellman_ford_path(self.graph, event_owner.nearest_node, marker.neares_node, weight=self.edge_weight)
 
         if len(self.path_layer_list) == 1:
             self.m.remove_layer(self.path_layer_list[0])
