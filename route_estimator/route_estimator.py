@@ -1,15 +1,19 @@
+import sys
 import networkx as nx
 import osmnx as ox
 import geopandas as gpd
 import numpy as np
 from ipyleaflet import *
 from shapely.geometry import LineString, mapping
+from simple_energy_model import ev_power_model
+from weather import get_weather_data
 
 class RouteEstimator:
 
     def __init__(self, config):
         self.starting_coord = config.starting_coord
         self.google_maps_key = config.google_maps_key
+        self.weather_key = config.weather_key
         self.distance = config.distance
         self.edge_weight = config.default_edge_weight
 
@@ -18,6 +22,9 @@ class RouteEstimator:
         
         # create path layer list
         self.path_layer_list = []
+        
+        # default simple energy model vehicle
+        self.vehicle = ev_power_model(config.default_ev_model['mass'], config.default_ev_model['air_resistance'], config.default_ev_model['area'])
         
         
         #create the map from ipyleaflet
@@ -82,3 +89,37 @@ class RouteEstimator:
     def set_nearest_node(self, marker):
         marker.nearest_node = ox.distance.nearest_nodes(self.graph, marker.location[0], marker.location[1])
         return
+    
+    
+    def activate_simple_energy_model(self):
+        # get a dataframe version of the graph to modify
+        graphDF = self.get_dataframe_from_graph()
+        
+        # placeholder list for new column on the graph
+        energy_consumed = []
+        
+        # get the starting wind and wind bearing for the energy consumption model
+        current_weather = get_weather_data(self.starting_coord[0], self.starting_coord[1], self.weather_key)
+        
+        # For each row, grab the required value, compute the energy, and add to the energy list
+        for index, row in graphDF[1].iterrows():
+            speed = row['speed_kph']
+            bearing = row['bearing']
+            grade = row['grade']
+            length = row['length']
+            wind_speed = current_weather['wind_speed']
+            wind_heading = current_weather['wind_heading']
+            energy_consumption = self.vehicle.energy_consumption(grade, speed/3.6, 0, wind_speed, car_heading=bearing, wind_h=wind_heading, length=length)
+            energy_consumed.append(energy_consumption)
+        
+        # create a new column on the graphDF
+        graphDF[1]['simple_model_e'] = energy_consumed
+        
+        # convert df back into graph and assign modified graph to self.graph
+        self.graph = ox.graph_from_gdfs(graphDF[0], graphDF[1])
+        
+        # update the node, edges objects
+        self.nodes, self.edges = ox.graph_to_gdfs(self.graph)
+        
+        #update the map mode to do shortest path based on the simple energy model
+        self.edge_weight = 'simple_model_e'

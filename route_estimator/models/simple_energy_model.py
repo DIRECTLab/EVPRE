@@ -35,7 +35,7 @@ class ev_power_model:
         return angle
 
 
-    def energy_consumption(self, angle, v_car, a, v_wind, car_heading=0, wind_h="S", length=1):
+    def energy_consumption(self, angle, v_car, a, v_wind, car_heading=0, wind_h=0, length=1):
         """
         A simple model to predict the instantaneous energy consumption of a vehicle
         Based off of https://www.sciencedirect.com/science/article/pii/S030626191630085X
@@ -53,9 +53,9 @@ class ev_power_model:
         """
 
         #calculate wind velocity, believing that the y-direction of the vehicle is always the y-axis.
-        
-        wind_heading = self.convert_heading(wind_h)
-
+        # the weather api returns it in degrees. no need to convert
+        # wind_heading = self.convert_heading(wind_h)
+        wind_heading = wind_h
         wind_heading -= car_heading
         
         wind_speed = v_car - v_wind * cos(radians(wind_heading))
