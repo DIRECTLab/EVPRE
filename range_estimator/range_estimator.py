@@ -79,5 +79,5 @@ class RangeEstimator:
         self.path_layer_list.append(path_layer)
         
     def set_nearest_node(self, marker):
-        marker.nearest_node = ox.get_nearest_node(self.graph, marker.location)
+        marker.nearest_node = ox.distance.nearest_nodes(self.graph, marker.location[0], marker.location[1])
         return
