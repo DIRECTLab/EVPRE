@@ -20,6 +20,7 @@ cryptography @ file:///Users/runner/miniforge3/conda-bld/cryptography_1616851693
 cycler==0.10.0
 decorator @ file:///home/conda/feedstock_root/build_artifacts/decorator_1621187651333/work
 defusedxml==0.7.1
+descartes==1.1.0
 docutils==0.17.1
 entrypoints==0.3
 fastsim @ file:///Users/bridger/fastsim-2021a
@@ -71,7 +72,7 @@ numba==0.52.0
 numpy==1.21.0
 osmnx @ file:///home/conda/feedstock_root/build_artifacts/osmnx_1621481331424/work
 packaging==20.9
-pandas==1.2.5
+pandas==1.3.1
 pandocfilters==1.4.3
 parso==0.7.1
 pexpect==4.8.0
