@@ -5,7 +5,7 @@ from shapely.geometry import LineString, mapping, Point, Polygon
 import geopandas as gpd
 import json
 from ipyleaflet import *
-from simple_energy_model import ev_power_model
+from simple_energy_model import ev_energy_model
 import numpy as np
 from copy import copy
 from descartes import PolygonPatch
@@ -30,7 +30,7 @@ class RangeEstimator:
         self.path_layer_list = []
 
         # default simple energy model vehicle
-        self.vehicle = ev_power_model(config.default_ev_model['mass'], config.default_ev_model['air_resistance'], config.default_ev_model['area'])
+        self.vehicle = ev_energy_model(config.default_ev_model['mass'], config.default_ev_model['air_resistance'], config.default_ev_model['area'])
 
     def create_graph(self):
         graph = ox.graph_from_point(self.starting_coord, self.distance, network_type="drive")
