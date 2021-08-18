@@ -12,6 +12,7 @@ from descartes import PolygonPatch
 
 class RangeEstimator:
     def __init__(self, config, graph=None):
+        self.model = config.model
         if(graph != None):
             self.graph = graph
             self.starting_coord = config.starting_coord
@@ -56,9 +57,11 @@ class RangeEstimator:
             print("Graph has not been created")
             
     def generate_isochrone(self):
-        battery_capacity = 23*3600000
+        if(self.model == "SIMPLE"):
+            battery_capacity = 23*3600000
+        else:
+            battery_capacity = 23
         levels = [battery_capacity*0.1, battery_capacity*0.2, battery_capacity*0.3, battery_capacity*0.4, battery_capacity*0.5, battery_capacity*0.6, battery_capacity*0.7, battery_capacity*0.8, battery_capacity*0.9, battery_capacity]
-        # iso_colors = ox.plot.get_colors(n=len(levels), cmap="prism", start=0, return_hex=True)
         iso_colors = ["#ff0000", "#fe4400", "#f86600", "#ee8200", "#df9b00", "#cdb200", "#b6c700", "#98db00", "#6fed00", "#00ff00"]
         node_colors = {}
 
@@ -78,19 +81,12 @@ class RangeEstimator:
         nc = [node_colors[node] if node in node_colors else "#999999" for node in self.graph.nodes()]
         ec = nc.copy()
 
-
-    #     fig, ax = ox.plot_graph(
-    #         graph,
-    #         node_color=nc,
-    #         node_size=15,
-    #         node_alpha=0.8,
-    #         edge_linewidth=0.2,
-    #         edge_color="#999999",
-    #     )
-
         isochrone_polys = []
         for energy in sorted(levels, reverse=True):
-            subgraph = nx.ego_graph(self.graph, center_node, radius=energy, distance="simple_model_e")
+            if(self.model == "SIMPLE"):
+                subgraph = nx.ego_graph(self.graph, center_node, radius=energy, distance="simple_model_e")
+            else:
+                subgraph = nx.ego_graph(self.graph, center_node, radius=energy, distance="fastsim_model_e")
             node_points = [Point((data["x"], data["y"])) for node, data in subgraph.nodes(data=True)]
             bounding_poly = gpd.GeoSeries(node_points).unary_union.convex_hull
             isochrone_polys.append(bounding_poly)

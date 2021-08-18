@@ -10,7 +10,7 @@ from weather import get_weather_data
 
 
 class RouteEstimator:
-    def __init__(self, config):
+    def __init__(self, config, graph=None):
         self.starting_coord = config.starting_coord
         self.google_maps_key = config.google_maps_key
         self.weather_key = config.weather_key
@@ -18,8 +18,12 @@ class RouteEstimator:
         self.edge_weight = config.default_edge_weight
 
         # create an instance of the graph
-        self.create_graph()
-
+        if(graph == None):
+            self.create_graph()
+        else:
+            self.graph = graph
+            self.nodes, self.edges =  ox.graph_to_gdfs(self.graph)
+        
         # create path layer list
         self.path_layer_list = []
 
