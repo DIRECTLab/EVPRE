@@ -20,7 +20,7 @@ class Config:
 
         # Map and Graph Configuration------------------------
         self.starting_coord = (41.740563, -111.813910)
-        self.distance = 50000
+        self.distance = 250000
         self.default_edge_weight = "length"
 
         # API keys--------------------------------------------
