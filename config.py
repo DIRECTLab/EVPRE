@@ -20,6 +20,7 @@ class Config:
 
         # Map and Graph Configuration------------------------
         self.starting_coord = (41.740563, -111.813910)
+        # May need to increase for full range estimate
         self.distance = 50000
         self.default_edge_weight = "length"
 
