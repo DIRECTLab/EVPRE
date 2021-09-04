@@ -1,8 +1,6 @@
 # Electric Vehicle Range Prediction Project
 ### Table of Contents
-- [Dependencies](../docs/Dependencies.md)
-- [Setup](../docs/Setup.md)
-- [APIs](../docs/API_Support.md)
+
 - [EVPRE Configuration and Usage](#EVPRE-Configuration-and-Usage)
 ---
 
