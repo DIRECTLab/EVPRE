@@ -96,6 +96,8 @@ class RouteEstimator:
             self.path_layer_list.pop()
 
         shortest_path_points = self.nodes.loc[shortest_path]
+        shortest_path_edge_points = self.edges.loc[shortest_path]
+        print(f"SHORTEST PATH ESTIMATED ENERGY COST: {shortest_path_edge_points[self.edge_weight].sum()}")
         path = gpd.GeoDataFrame(
             [LineString(shortest_path_points.geometry.values)], columns=['geometry'])
         path_layer = GeoData(geo_dataframe=path, style={
