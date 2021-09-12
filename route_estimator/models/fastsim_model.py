@@ -11,7 +11,7 @@ class fastsim_energy_model:
         self.fastsim_vehicle_csv_path = fastsim_vehicle_csv_path
         self.fastsim_vehicle_csv_index = fastsim_vehicle_csv_index
 
-    def get_consumed_kwh_fastsim(self, avg_speed_mps: float, grade: float, distance_m: float) -> float:
+    def get_consumed_kwh_fastsim(self, avg_speed_mps: float, grade: float, distance_m: float, idle_seconds: int = 0) -> float:
         # FASTSim likes a gentle increase, so we will build a ramp in speed that will be removed from the final equation
         cyc_mps_builder = []
         cur_speed = 0
@@ -75,7 +75,11 @@ class fastsim_energy_model:
         sim_power_kwh = sim_drive.essCurKwh[start_index] - \
             sim_drive.essCurKwh[stop_index]
 
+        
         # print(f'Sim calculated kWh loss: {sim_power}')
+
+        if idle_seconds > 0:
+            sim_power_kwh += (veh.idleFcKw * idle_seconds) / 3600
 
         return sim_power_kwh
 
