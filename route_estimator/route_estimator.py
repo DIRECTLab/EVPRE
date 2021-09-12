@@ -96,6 +96,12 @@ class RouteEstimator:
             self.path_layer_list.pop()
 
         shortest_path_points = self.nodes.loc[shortest_path]
+        #these edges are all relative to the node, it is not an accurate way to measure the path traversed
+        shortest_path_edge_points = self.edges.loc[shortest_path]
+        # assign to inner class member
+        self.last_shortest_path_nodes = shortest_path_points
+        self.last_shortest_path_related_edges = shortest_path_edge_points
+        
         path = gpd.GeoDataFrame(
             [LineString(shortest_path_points.geometry.values)], columns=['geometry'])
         path_layer = GeoData(geo_dataframe=path, style={
@@ -176,3 +182,11 @@ class RouteEstimator:
 
         # update the map mode to do shortest path based on the simple energy model
         self.edge_weight = 'simple_model_e'
+        
+        
+        
+    def get_last_path_nodes(self):
+        return self.last_shortest_path_nodes
+    
+    def get_last_path_rel_edges(self):
+        return self.last_shortest_path_related_edges
