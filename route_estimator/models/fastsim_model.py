@@ -84,5 +84,5 @@ class fastsim_energy_model:
         return sim_power_kwh
 
 
-focus_csv = str(list(pathlib.Path(os.getcwd()).rglob('*fastsim_focus.csv'))[0])
+focus_csv = str(list(pathlib.Path(os.getcwd()).rglob('*fastsim_vehicles.csv'))[0])
 fastsim_energy_model(focus_csv, 1).get_consumed_kwh_fastsim(15, 0.1, 100.0)
