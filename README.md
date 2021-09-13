@@ -5,7 +5,7 @@
 ---
 
 # Software Description
-The Electric Vehicle Range Prediction Project is a piece of software that uses various services and data to make route predictions.  These predictions are found using a machine learning algorithm that takes geospatial data and compiles it together to make route plans.
+The Electric Vehicle Range Prediction Project is a piece of software that uses various services and data to make route predictions based on energy consumption. 
 
 
 
@@ -59,3 +59,12 @@ range_estimator_simple_model.generate_isochrone()
 
 ## Energy and Vehicle Model Information
 See the [models README.md](route_estimator/models/README.md)
+
+## Installation
+To install all of the required packages:
+`pip install -r requirements.txt`
+
+To install fastsim:
+Navigate to the directory that contains the fastsim source code. Run `pip install .` to install it to your pip.
+
+After everything is installed, run `jupyter-lab` in the root directory of the application. This should open a jupyter notebook. The main examples are in `main.ipynb`.
