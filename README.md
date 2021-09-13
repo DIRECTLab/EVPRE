@@ -2,10 +2,11 @@
 ### Table of Contents
 
 - [EVPRE Configuration and Usage](#EVPRE-Configuration-and-Usage)
+- [Dependencies Summary](https://github.com/DIRECTLab/EVPRE/blob/development/docs/Dependencies.md)
 ---
 
 # Software Description
-The Electric Vehicle Range Prediction Project is a piece of software that uses various services and data to make route predictions based on energy consumption. 
+The Electric Vehicle Range Prediction Project is a piece of software that uses various services and data to make route predictions based on energy consumption.
 
 
 
