@@ -16,6 +16,10 @@ class RouteEstimator:
         self.weather_key = config.weather_key
         self.distance = config.distance
         self.edge_weight = config.default_edge_weight
+        #used for map compare mode where three lines are drawn
+        self.compare_mode = False
+        
+        self.config = config
 
         # create an instance of the graph
         if(graph == None):
@@ -35,7 +39,7 @@ class RouteEstimator:
         else:
             # default simple energy model vehicle
             self.vehicle = ev_energy_model(
-                config.default_ev_model['mass'], config.default_ev_model['air_resistance'], config.default_ev_model['area'])
+                config.vehicle_config['mass'], config.vehicle_config['air_resistance'], config.vehicle_config['area'])
 
         # create the map from ipyleaflet
         self.m = Map(center=self.starting_coord,
@@ -88,20 +92,73 @@ class RouteEstimator:
         event_owner.nearest_node = ox.get_nearest_node(
             self.graph, event_owner.location)
         marker.neares_node = ox.get_nearest_node(self.graph, marker.location)
-        shortest_path = nx.bellman_ford_path(
-            self.graph, event_owner.nearest_node, marker.neares_node, weight=self.edge_weight)
+        
+        if self.compare_mode:
+            self.handle_compare_mode(event_owner.nearest_node, marker.neares_node)
+        else:
+            
+            shortest_path = nx.bellman_ford_path(
+                self.graph, event_owner.nearest_node, marker.neares_node, weight=self.edge_weight)
 
-        if len(self.path_layer_list) == 1:
+            if len(self.path_layer_list) == 1:
+                self.m.remove_layer(self.path_layer_list[0])
+                self.path_layer_list.pop()
+
+            shortest_path_points = self.nodes.loc[shortest_path]
+            #these edges are all relative to the node, it is not an accurate way to measure the path traversed
+            shortest_path_edge_points = self.edges.loc[shortest_path]
+            # assign to inner class member
+            self.last_shortest_path_nodes = shortest_path_points
+            self.last_shortest_path_related_edges = shortest_path_edge_points
+
+            path = gpd.GeoDataFrame(
+                [LineString(shortest_path_points.geometry.values)], columns=['geometry'])
+            path_layer = GeoData(geo_dataframe=path, style={
+                                 'color': 'black', 'weight': 2})
+            self.m.add_layer(path_layer)
+            self.path_layer_list.append(path_layer)
+        
+    def handle_compare_mode(self, event_marker, nearest_marker):
+        
+        if len(self.path_layer_list) == 3:
             self.m.remove_layer(self.path_layer_list[0])
+            self.m.remove_layer(self.path_layer_list[1])
+            self.m.remove_layer(self.path_layer_list[2])
             self.path_layer_list.pop()
-
-        shortest_path_points = self.nodes.loc[shortest_path]
-        path = gpd.GeoDataFrame(
-            [LineString(shortest_path_points.geometry.values)], columns=['geometry'])
-        path_layer = GeoData(geo_dataframe=path, style={
-                             'color': 'black', 'weight': 2})
-        self.m.add_layer(path_layer)
-        self.path_layer_list.append(path_layer)
+            self.path_layer_list.pop()
+            self.path_layer_list.pop()
+            
+        shortest_path_length = nx.bellman_ford_path(
+            self.graph, event_marker, nearest_marker, weight='length')
+        shortest_path_simple_e = nx.bellman_ford_path(
+            self.graph, event_marker, nearest_marker, weight='simple_model_e')
+        shortest_path_fastsim = nx.bellman_ford_path(
+            self.graph, event_marker, nearest_marker, weight='fastsim_model_e')
+        
+        length_points = self.nodes.loc[shortest_path_length]
+        simple_e_points = self.nodes.loc[shortest_path_simple_e]
+        fastsim_points = self.nodes.loc[shortest_path_fastsim]
+        
+        length_path = path = gpd.GeoDataFrame(
+            [LineString(length_points.geometry.values)], columns=['geometry'])
+        length_layer = GeoData(geo_dataframe=length_path, style={
+                             'color': 'black', 'weight': 4})
+        self.m.add_layer(length_layer)
+        self.path_layer_list.append(length_layer)
+        
+        simple_e_path = path = gpd.GeoDataFrame(
+            [LineString(simple_e_points.geometry.values)], columns=['geometry'])
+        simple_e_layer = GeoData(geo_dataframe=simple_e_path, style={
+                             'color': 'blue', 'weight': 3})
+        self.m.add_layer(simple_e_layer)
+        self.path_layer_list.append(simple_e_layer)
+        
+        fastsim_path = gpd.GeoDataFrame(
+            [LineString(fastsim_points.geometry.values)], columns=['geometry'])
+        fastsim_layer = GeoData(geo_dataframe=fastsim_path, style={
+                             'color': 'red', 'weight': 2})
+        self.m.add_layer(fastsim_layer)
+        self.path_layer_list.append(fastsim_layer)
 
     def set_nearest_node(self, marker):
         marker.nearest_node = ox.distance.nearest_nodes(
@@ -113,6 +170,16 @@ class RouteEstimator:
             self.__activate_simple_energy_model()
         elif isinstance(self.vehicle, fastsim_energy_model):
             self.__activate_fastsim_energy_model()
+            
+    def activate_both_models(self):
+        self.vehicle = fastsim_energy_model(
+                self.config.fastsim_vehicle_csv_path, self.config.fastsim_vehicle_csv_index)
+        self.__activate_fastsim_energy_model()
+        self.vehicle = ev_energy_model(
+                self.config.vehicle_config['mass'], self.config.vehicle_config['air_resistance'], self.config.vehicle_config['area'])
+        self.__activate_simple_energy_model()
+        print("Loaded both energy estimates")
+        self.compare_mode = True
 
     def __activate_fastsim_energy_model(self):
         # get a dataframe version of the graph to modify
@@ -176,3 +243,11 @@ class RouteEstimator:
 
         # update the map mode to do shortest path based on the simple energy model
         self.edge_weight = 'simple_model_e'
+        
+        
+        
+    def get_last_path_nodes(self):
+        return self.last_shortest_path_nodes
+    
+    def get_last_path_rel_edges(self):
+        return self.last_shortest_path_related_edges
