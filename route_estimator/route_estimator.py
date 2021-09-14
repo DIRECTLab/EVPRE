@@ -142,14 +142,14 @@ class RouteEstimator:
         length_path = path = gpd.GeoDataFrame(
             [LineString(length_points.geometry.values)], columns=['geometry'])
         length_layer = GeoData(geo_dataframe=length_path, style={
-                             'color': 'black', 'weight': 2})
+                             'color': 'black', 'weight': 4})
         self.m.add_layer(length_layer)
         self.path_layer_list.append(length_layer)
         
         simple_e_path = path = gpd.GeoDataFrame(
             [LineString(simple_e_points.geometry.values)], columns=['geometry'])
         simple_e_layer = GeoData(geo_dataframe=simple_e_path, style={
-                             'color': 'blue', 'weight': 2})
+                             'color': 'blue', 'weight': 3})
         self.m.add_layer(simple_e_layer)
         self.path_layer_list.append(simple_e_layer)
         
