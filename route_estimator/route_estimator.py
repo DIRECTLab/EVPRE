@@ -39,7 +39,7 @@ class RouteEstimator:
         else:
             # default simple energy model vehicle
             self.vehicle = ev_energy_model(
-                config.default_ev_model['mass'], config.default_ev_model['air_resistance'], config.default_ev_model['area'])
+                config.vehicle_config['mass'], config.vehicle_config['air_resistance'], config.vehicle_config['area'])
 
         # create the map from ipyleaflet
         self.m = Map(center=self.starting_coord,
@@ -176,7 +176,7 @@ class RouteEstimator:
                 self.config.fastsim_vehicle_csv_path, self.config.fastsim_vehicle_csv_index)
         self.__activate_fastsim_energy_model()
         self.vehicle = ev_energy_model(
-                self.config.default_ev_model['mass'], self.config.default_ev_model['air_resistance'], self.config.default_ev_model['area'])
+                self.config.vehicle_config['mass'], self.config.vehicle_config['air_resistance'], self.config.vehicle_config['area'])
         self.__activate_simple_energy_model()
         print("Loaded both energy estimates")
         self.compare_mode = True

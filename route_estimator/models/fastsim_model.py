@@ -84,8 +84,11 @@ class fastsim_energy_model:
         return sim_power_kwh
 
 
-focus_csv = str(list(pathlib.Path(os.getcwd()).rglob('*fastsim_vehicles.csv'))[0])
 
-for i in range(1, 5):
-    print(f"    noidle({i}): {fastsim_energy_model(focus_csv, i).get_consumed_kwh_fastsim(15, 0.1, 100.0)}")
-    print(f"3600s idle({i}): {fastsim_energy_model(focus_csv, i).get_consumed_kwh_fastsim(15, 0.1, 100.0, 3600)}")
+if __name__ == "__main__":
+
+    focus_csv = str(list(pathlib.Path(os.getcwd()).rglob('*fastsim_vehicles.csv'))[0])
+
+    for i in range(1, 5):
+        print(f"    noidle({i}): {fastsim_energy_model(focus_csv, i).get_consumed_kwh_fastsim(15, 0.1, 100.0)}")
+        print(f"3600s idle({i}): {fastsim_energy_model(focus_csv, i).get_consumed_kwh_fastsim(15, 0.1, 100.0, 3600)}")
