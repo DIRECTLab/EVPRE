@@ -16,7 +16,7 @@ FORDFOCUSELECTRIC2012 = {
     "kwh": 23,
     "mass": 1337,
     "air_resistance": 0.28,
-    "area": 1.825 * 1.469
+    "area": 2.24
 }
 
 CHEVSPARK2016 = {
