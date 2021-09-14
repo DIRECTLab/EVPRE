@@ -10,6 +10,7 @@ import numpy as np
 from copy import copy
 from descartes import PolygonPatch
 
+
 class RangeEstimator:
     def __init__(self, config, graph=None):
         self.model = config.model
@@ -31,7 +32,7 @@ class RangeEstimator:
         self.path_layer_list = []
 
         # default simple energy model vehicle
-        self.vehicle = ev_energy_model(config.default_ev_model['mass'], config.default_ev_model['air_resistance'], config.default_ev_model['area'])
+        self.vehicle = ev_energy_model(config.vehicle_config['mass'], config.vehicle_config['air_resistance'], config.vehicle_config['area'])
 
     def create_graph(self):
         graph = ox.graph_from_point(self.starting_coord, self.distance, network_type="drive")
@@ -56,13 +57,23 @@ class RangeEstimator:
         except:
             print("Graph has not been created")
             
-    def generate_isochrone(self):
-        if(self.model == "SIMPLE"):
-            battery_capacity = 23*3600000
+    def generate_isochrone(self, batterykWh, batterykWhPercentages = None, iso_colors = None):
+
+        if batterykWhPercentages is None:
+            if(self.model == "SIMPLE"):
+                battery_capacity = batterykWh * 3600000
+            else:
+                battery_capacity = batterykWh
+            levels = [battery_capacity*0.1, battery_capacity*0.2, battery_capacity*0.3, battery_capacity*0.4, battery_capacity*0.5, battery_capacity*0.6, battery_capacity*0.7, battery_capacity*0.8, battery_capacity*0.9, battery_capacity]
         else:
-            battery_capacity = 23
-        levels = [battery_capacity*0.1, battery_capacity*0.2, battery_capacity*0.3, battery_capacity*0.4, battery_capacity*0.5, battery_capacity*0.6, battery_capacity*0.7, battery_capacity*0.8, battery_capacity*0.9, battery_capacity]
-        iso_colors = ["#ff0000", "#fe4400", "#f86600", "#ee8200", "#df9b00", "#cdb200", "#b6c700", "#98db00", "#6fed00", "#00ff00"]
+            if(self.model == "SIMPLE"):
+                levels = [batterykWh * 3600000 * perc for perc in batterykWhPercentages]
+            else:
+                levels = [batterykWh * perc for perc in batterykWhPercentages]
+            
+        
+        if iso_colors is None:
+            iso_colors = ["#ff0000", "#fe4400", "#f86600", "#ee8200", "#df9b00", "#cdb200", "#b6c700", "#98db00", "#6fed00", "#00ff00"]
         node_colors = {}
 
 
@@ -78,7 +89,7 @@ class RangeEstimator:
             graphs.append(copy(subgraph))
             for node in subgraph.nodes():
                 node_colors[node] = color
-        nc = [node_colors[node] if node in node_colors else "#999999" for node in self.graph.nodes()]
+        nc = [node_colors[node] if node in node_colors else "#222222" for node in self.graph.nodes()]
         ec = nc.copy()
 
         isochrone_polys = []
@@ -92,9 +103,9 @@ class RangeEstimator:
             isochrone_polys.append(bounding_poly)
 
         fig, ax = ox.plot_graph(
-            self.graph, show=False, close=False, edge_color="#999999", edge_alpha=0.2, node_size=0
+            self.graph, show=False, close=False, edge_color="#222222", edge_alpha=0.2, node_size=0, bgcolor='white'
         )
         for polygon, fc in zip(isochrone_polys, iso_colors):
-            patch = PolygonPatch(polygon, fc=fc, ec="none", alpha=0.6, zorder=-1)
+            patch = PolygonPatch(polygon, fc=fc, ec="none", alpha=0.4, zorder=-1)
             ax.add_patch(patch)
         plt.show()
