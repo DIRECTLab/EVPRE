@@ -23,3 +23,6 @@ The simple energy model calculates instantaneous power from the following parame
 - Rolling resistance
 - Air resistance
 - Gravity (incline)
+
+## Installation 
+To install fastsim: Navigate to the directory (example: fastsim-2021a) that contains the fastsim source code. Run pip install . to install it to your pip.
