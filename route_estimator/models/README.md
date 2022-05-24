@@ -13,6 +13,9 @@ Steps to create a vehicle model:
 3. Grab the new vehicle's data and append it to the FASTSim vehicle model CSV.
 4. Modify the index in config.py to match your vehicle.
 
+## Installation 
+Navigate to the directory (example: fastsim-2021a) that contains the fastsim source code. Run pip install . to install it to your pip.
+
 ## Simple Energy and Vehicle Model
 The simple energy model utilizes calculations based on [Power-based electric vehicle energy consumption model: Model development and validation](https://www.sciencedirect.com/science/article/pii/S030626191630085X). The energy model relies on the user to implement the proper vehicle parameters into the config.py file.
 
@@ -23,6 +26,3 @@ The simple energy model calculates instantaneous power from the following parame
 - Rolling resistance
 - Air resistance
 - Gravity (incline)
-
-## Installation 
-To install fastsim: Navigate to the directory (example: fastsim-2021a) that contains the fastsim source code. Run pip install . to install it to your pip.
