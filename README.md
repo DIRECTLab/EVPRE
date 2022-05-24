@@ -27,9 +27,9 @@ WEATHER_KEY=OPEN WEATHER API KEY
 TRAFFIC_KEY=TOMTOM API KEY
 
 ```
-[GOOGLE MAPS ELEVATION API KEY](https://developers.google.com/maps/documentation/elevation/get-api-key)
-[OPEN WEATHER API KEY](https://openweathermap.org/api)
-[TOMTOM API KEY](https://developer.tomtom.com/traffic-api/documentation/product-information/introduction)
+- [GOOGLE MAPS ELEVATION API KEY](https://developers.google.com/maps/documentation/elevation/get-api-key)
+- [OPEN WEATHER API KEY](https://openweathermap.org/api)
+- [TOMTOM API KEY](https://developer.tomtom.com/traffic-api/documentation/product-information/introduction)
 
 See the documentation on `python-dotenv` for more details.
 
