@@ -73,6 +73,6 @@ Navigate to the directory (example: fastsim-2021a) that contains the fastsim sou
 
 4. Make sure `networkx` and `osmnx` are installed to your pip. 
 
-5. Make a .env file containing the keys like above. 
+5. Make a `.env` file containing the keys like above. 
 
 6. After everything is installed, run `jupyter-lab` in the root directory of the application. This should open a jupyter notebook. The main examples are in `main.ipynb`.
