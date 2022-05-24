@@ -62,10 +62,17 @@ range_estimator_simple_model.generate_isochrone()
 See the [models README.md](route_estimator/models/README.md)
 
 ## Installation
-To install all of the required packages:
+
+1. To install all of the required packages:
 `pip install -r requirements.txt`
 
-To install fastsim:
-Navigate to the directory that contains the fastsim source code. Run `pip install .` to install it to your pip.
+2. To install fastsim:
+Navigate to the directory (example: fastsim-2021a) that contains the fastsim source code. Run `pip install .` to install it to your pip.
 
-After everything is installed, run `jupyter-lab` in the root directory of the application. This should open a jupyter notebook. The main examples are in `main.ipynb`.
+3. Make sure you have installed python-dotenv using `pip install python-dotenv`.
+
+4. Make sure `networkx` and `osmnx` are installed to your pip. 
+
+5. Make a .env file containing the keys like above. 
+
+6. After everything is installed, run `jupyter-lab` in the root directory of the application. This should open a jupyter notebook. The main examples are in `main.ipynb`.
