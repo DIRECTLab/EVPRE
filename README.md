@@ -22,7 +22,7 @@ Now that all dependencies have been downloaded, simply navigate to where the cod
 ### Config.py and .env
 The Config.py requires the package `python-dotenv`. In the root level of the application a `.env` file will need to be created like this:
 ```
-GOOGLE_MAPS_KEY=[GOOGLE MAPS ELEVATION API KEY](https://developers.google.com/maps/documentation/elevation/get-api-key)
+GOOGLE_MAPS_KEY=[GOOGLE MAPS ELEVATION API KEY](https://developers.google.com/maps/documentation/elevation/get-api-key/)
 WEATHER_KEY=OPEN WEATHER API KEY
 TRAFFIC_KEY=TOMTOM API KEY
 
