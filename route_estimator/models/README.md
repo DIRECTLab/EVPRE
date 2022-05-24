@@ -13,7 +13,7 @@ Steps to create a vehicle model:
 3. Grab the new vehicle's data and append it to the FASTSim vehicle model CSV.
 4. Modify the index in config.py to match your vehicle.
 
-## Installation 
+### Installation 
 Navigate to the directory (example: fastsim-2021a) that contains the fastsim source code. Run pip install . to install it to your pip.
 
 ## Simple Energy and Vehicle Model
