@@ -49,7 +49,7 @@ For example, to utilize the simple energy model,
 
 ```
 route_estimator_simple_model = RouteEstimator(Config())
-route_estimator_simple_model.activate_energy_model()
+route_estimator_simple_model.activate_esnergy_model()
 route_map_simple_e = route_estimator_simple_model.create_map()
 route_map_simple_e
 ```

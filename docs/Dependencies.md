@@ -56,7 +56,7 @@ Descrates is an image data and function plotter.
 
 [More information on NumPy : https://pypi.org/project/descartes/]
 
-###FastSim
+### FastSim
 FastSim is a simulation program that allows users to run simulations on vehicles and ranges.  There are many different variables to adjust and use to gather data.  It is extremely fast and accurate making it a very powerful tool for our software.
 
 
