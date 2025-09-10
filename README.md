@@ -9,22 +9,14 @@
 The Electric Vehicle Range Prediction Project is a piece of software that uses various services and data to make route predictions based on energy consumption.
 
 
-
-
-## Running the Software
-Now that all dependencies have been downloaded, simply navigate to where the code is saved, use your favorite shell and run 'jupyter notebook'.  This will open up a web browser with all the code to run.
-
-
-
-
 # EVPRE Configuration and Usage
 
 ### Config.py and .env
 The Config.py requires the package `python-dotenv`. In the root level of the application a `.env` file will need to be created like this:
 ```
-GOOGLE_MAPS_KEY=GOOGLE MAPS ELEVATION API KEY
-WEATHER_KEY=OPEN WEATHER API KEY
-TRAFFIC_KEY=TOMTOM API KEY
+GOOGLE_MAPS_KEY= Your personal GOOGLE MAPS ELEVATION API KEY
+WEATHER_KEY= Your personal OPEN WEATHER API KEY
+TRAFFIC_KEY= Your personal TOMTOM API KEY
 
 ```
 - [GOOGLE MAPS ELEVATION API KEY](https://developers.google.com/maps/documentation/elevation/get-api-key)
@@ -81,3 +73,7 @@ Navigate to the directory (example: fastsim-2021a) that contains the fastsim sou
 5. Make a `.env` file in the root containing the keys like above. 
 
 6. After everything is installed, run `jupyter-lab` in the root directory of the application. This should open a jupyter notebook. The main examples are in `main.ipynb`.
+
+
+## Running the Software
+Now that all dependencies have been downloaded, simply navigate to where the code is saved, use your favorite shell and run 'jupyter notebook'.  This will open up a web browser with all the code to run.
