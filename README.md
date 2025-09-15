@@ -41,7 +41,7 @@ For example, to utilize the simple energy model,
 
 ```
 route_estimator_simple_model = RouteEstimator(Config())
-route_estimator_simple_model.activate_esnergy_model()
+route_estimator_simple_model.activate_energy_model()
 route_map_simple_e = route_estimator_simple_model.create_map()
 route_map_simple_e
 ```
@@ -64,7 +64,7 @@ See the [models README.md](route_estimator/models/README.md)
 `pip install -r requirements.txt`
 
 2. To install fastsim:
-Navigate to the directory (example: fastsim-2021a) that contains the fastsim source code. Run `pip install .` to install it to your pip.
+Navigate to the director and run `pip install .` to install it to your pip.
 
 3. Make sure you have installed python-dotenv using `pip install python-dotenv`.
 

@@ -9,6 +9,7 @@ jupyterlab
 matplotlib
 ipyleaflet
 seaborn
+folium
 
 # Other Python Libraries
 python-dotenv 

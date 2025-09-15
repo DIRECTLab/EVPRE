@@ -27,6 +27,7 @@ Matplotlib is a Python Library that helps create visualization for data.  It is 
 ### Networkx
 Networkx is a package in python that provides the ability to organize and structure complex networks.  Networkx provides the ability to organize and structure graphs, diagraphs, and multigraphs.  Additionally, it provides many different built in operations and algorithms.  This is essential for map and route planning due to how it provides essential functions and the ability to add and organize complex data on edges and nodes.
 
+[More information on Networkx](https://networkx.org/documentation/stable/tutorial.html)
 
 ### Numpy
 NumPy is a python package for scientific computing.  NumPy provides many fast operations on arrays.  These operations include: mathematical manipulation, logical manipulation, shape manipulation, fast sorting, fast array selection, array insertion, array deletion, basic linear algebra, random population, and more.
