@@ -9,3 +9,6 @@ jupyterlab
 matplotlib
 ipyleaflet
 seaborn
+
+# Other Python Libraries
+python-dotenv 
