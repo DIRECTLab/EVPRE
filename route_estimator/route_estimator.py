@@ -4,8 +4,8 @@ import geopandas as gpd
 import numpy as np
 from ipyleaflet import *
 from shapely.geometry import LineString, mapping
-from simple_energy_model import ev_energy_model
-from fastsim_model import fastsim_energy_model
+from route_estimator.models.simple_energy_model import ev_energy_model
+from route_estimator.models.fastsim_model import fastsim_energy_model
 from weather import get_weather_data
 
 
@@ -69,11 +69,19 @@ class RouteEstimator:
         graph = ox.add_edge_speeds(graph)
         graph = ox.add_edge_bearings(graph)
         graph = ox.add_edge_travel_times(graph)
-        graph = ox.add_node_elevations_google(graph, self.google_maps_key)
+        graph = self.count_Google_API_calls(graph, self.google_maps_key)
         graph = ox.add_edge_grades(graph)
         self.graph = graph
         # save a dataframe version of edges and nodes for event handler
         self.nodes, self.edges = ox.graph_to_gdfs(self.graph)
+
+    # This method is used to estimate the number of Google API calls needed to get elevation data
+    def count_Google_API_calls(self, graph, google_API_key):
+        num_nodes = len(graph.nodes)
+        batch_size = 512
+        total_calls = math.ceil(num_nodes / batch_size)
+        print(f"Number of Google API calls needed for elevation data: {total_calls}")
+        return ox.add_node_elevations_google(graph, google_API_key)
 
     def get_graph(self):
         try:
