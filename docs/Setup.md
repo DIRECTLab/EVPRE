@@ -15,13 +15,15 @@ Jupyter Notebook provides majority of the services that the software requires to
 ### Python Installation
 The backbone of the project is built on Python, so it is crucial that all users wanting to run this must have it.  Python packages and instructions to install it can be found here in a link below.  Additionally, for Windows users, you must set up environment variables in order for this to work.  An additional guide can be found below in a link as well.
 
-[Python Installer](https://www.python.org/downloads/) 
+[Python Installer](https://www.python.org/downloads/)
+ 
 [Setting Up Enviorment Variables on Windows](https://www.tutorialspoint.com/python/python_environment.htm) 
 
 ### Pip Installation
 In order to install dependencies, we must install pip.  pip is the standard package manager for Python. It allows you to install and manage additional packages that are not part of the Python standard library.  Instructions on how to install and set up pip can be found in a link below.
 
-[pip Installer](https://pip.pypa.io/en/stable/installation/) 
+[pip Installer](https://pip.pypa.io/en/stable/installation/)
+
 [More information on pip](https://realpython.com/what-is-pip/) 
 
 ### GDAL Installation

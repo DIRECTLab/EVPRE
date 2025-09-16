@@ -5,7 +5,7 @@ from shapely.geometry import LineString, mapping, Point, Polygon
 import geopandas as gpd
 import json
 from ipyleaflet import *
-from simple_energy_model import ev_energy_model
+from route_estimator import ev_energy_model
 import numpy as np
 from copy import copy
 from descartes import PolygonPatch
