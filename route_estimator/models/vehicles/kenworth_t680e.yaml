@@ -1,0 +1,226 @@
+name: Kenworth T680E
+doc: Reasonably accurate model of a Kenworth T680E battery electric truck, based on the 2021 model year
+year: 2021
+
+pt_type:
+  BEV:
+    em:
+      pwr_out_max_watts: 900000.0 # max power output from motor
+      mass_kilograms: 500.0
+      eff_interp_achieved:
+        data:
+          grid:
+            - v: 1
+              dim: [12]
+              data: [0.0,0.05,0.10,0.20,0.30,0.40,0.50,0.60,0.70,0.80,0.90,1.0]
+          values:
+            v: 1
+            dim: [12]
+            data: [0.85,0.88,0.90,0.92,0.94,0.95,0.95,0.94,0.93,0.92,0.90,0.88]
+        strategy: Linear
+        extrapolate: Error
+      save_interval: 1
+      state:
+        i: 0
+        eff: 0.0
+        eff_fwd_at_max_input: 0.0
+        eff_at_max_regen: 0.0
+        energy_loss_joules: 0.0
+        energy_elec_prop_in_joules: 0.0
+        energy_mech_prop_out_joules: 0.0
+        energy_mech_dyn_brake_joules: 0.0
+        energy_elec_dyn_brake_joules: 0.0
+        energy_out_req_joules: 0.0
+        pwr_elec_prop_in_watts: 0.0
+        pwr_mech_fwd_out_max_watts: 0.0
+        pwr_mech_regen_max_watts: 150000.0  # Realistic 150 kW regen limit
+        pwr_out_req_watts: 0.0
+        pwr_mech_prop_out_watts: 0.0
+        pwr_mech_dyn_brake_watts: 0.0
+        pwr_elec_dyn_brake_watts: 0.0
+        pwr_loss_watts: 0.0
+      history:
+        i: []
+        eff: []
+        eff_fwd_at_max_input: []
+        eff_at_max_regen: []
+        energy_loss_joules: []
+        energy_out_req_joules: []
+        energy_elec_prop_in_joules: []
+        energy_mech_prop_out_joules: []
+        energy_mech_dyn_brake_joules: []
+        energy_elec_dyn_brake_joules: []
+        pwr_elec_prop_in_watts: []
+        pwr_mech_fwd_out_max_watts: []
+        pwr_mech_regen_max_watts: []
+        pwr_out_req_watts: []
+        pwr_mech_prop_out_watts: []
+        pwr_mech_dyn_brake_watts: []
+        pwr_elec_dyn_brake_watts: []
+        pwr_loss_watts: []
+
+    transmission:
+      mass_kilograms: 400.0
+      eff_interp: 0.96
+      state:
+        i: 0
+        eff: 0.96
+        energy_in_joules: 0.0
+        energy_out_joules: 0.0
+        energy_loss_joules: 0.0
+        pwr_out_regen_max_watts: 150000.0  # Realistic 150 kW regen limit
+        pwr_out_fwd_max_watts: 550000.0  # max power output from motor
+        pwr_out_watts: 0.0
+        pwr_in_watts: 0.0
+        pwr_loss_watts: 0.0
+      history:
+        i: []
+        eff: []
+        energy_in_joules: []
+        energy_out_joules: []
+        energy_loss_joules: []
+        pwr_out_regen_max_watts: []
+        pwr_out_fwd_max_watts: []
+        pwr_out_watts: []
+        pwr_in_watts: []
+        pwr_loss_watts: []
+
+    res:
+      energy_capacity_joules: 1.43e12          # 396 kWh battery
+      specific_energy_joules_per_kilogram: 621739130.4  # energy_density = capacity / mass
+      pwr_out_max_watts: 900000.0           # max continuous battery output
+      mass_kilograms: 2300.0                 # battery mass
+      save_interval: 1
+      eff_interp:
+        Constant: 0.95
+      min_soc: 0.1
+      max_soc: 1.0  
+      state:
+        i: 0
+        soc: 1.0
+        soc_regen_buffer: 0.0
+        soc_disch_buffer: 0.0
+        soh: 1.0
+        eff: 1.0
+        pwr_out_chemical_watts: 0.0
+        pwr_prop_max_watts: 0.0
+        pwr_regen_max_watts: 0.0
+        pwr_disch_max_watts: 0.0
+        pwr_charge_max_watts: 150000.0  # Realistic 150 kW regen limit
+        pwr_out_electrical_watts: 0.0
+        pwr_out_prop_watts: 0.0
+        pwr_aux_watts: 0.0
+        pwr_loss_watts: 0.0
+        energy_out_electrical_joules: 0.0
+        energy_out_chemical_joules: 0.0
+        energy_out_prop_joules: 0.0
+        energy_aux_joules: 0.0
+        energy_loss_joules: 0.0
+      history:
+        i: []
+        soc: []
+        soc_regen_buffer: []
+        soc_disch_buffer: []
+        soh: []
+        eff: []
+        pwr_out_chemical_watts: []
+        pwr_prop_max_watts: []
+        pwr_regen_max_watts: []
+        pwr_disch_max_watts: []
+        pwr_charge_max_watts: []
+        pwr_out_electrical_watts: []
+        energy_out_chemical_joules: []
+        pwr_out_prop_watts: []
+        pwr_aux_watts: []
+        pwr_loss_watts: []
+        energy_out_electrical_joules: []
+        energy_out_prop_joules: []
+        energy_aux_joules: []
+        energy_loss_joules: []
+
+    mass_kilograms: 3200.0             # Total powertrain mass (battery + motor + gearbox)
+
+chassis:
+  drag_coef: 0.58
+  frontal_area_square_meters: 10.0
+  wheel_rr_coef: 0.0050
+  wheel_inertia_kilogram_square_meters: 12.0
+  num_wheels: 6
+  wheel_radius_meters: 0.506
+  tire_code: ~
+  cg_height_meters: 1.25
+  wheel_fric_coef: 0.7
+  drive_type: RWD
+  drive_axle_weight_frac: 0.67
+  wheel_base_meters: 5.5
+  # mass_kilograms: 15300.0
+  glider_mass_kilograms: 7500.0 #Removed this line to avoid double-counting mass from mass_kilograms
+  cargo_mass_kilograms: 25587.0 # Cargo mass (GVWR - chassis mass)
+cabin: None
+hvac: None
+
+# --- TOTAL MASS ---
+# chassis + cabin + hvac + powertrain + cargo = 36,287 kg (≈80,000 lbs)
+mass_kilograms: 36287.0
+pwr_aux_base_watts: 3000.0
+save_interval: 1
+state:
+  i: 0
+  time_seconds: 0.0
+  pwr_prop_fwd_max_watts: 0.0
+  pwr_prop_bwd_max_watts: 0.0
+  pwr_tractive_watts: 0.0
+  pwr_tractive_for_cyc_watts: 0.0
+  energy_tractive_joules: 0.0
+  pwr_aux_watts: 0.0
+  energy_aux_joules: 0.0
+  pwr_drag_watts: 0.0
+  energy_drag_joules: 0.0
+  pwr_accel_watts: 0.0
+  energy_accel_joules: 0.0
+  pwr_ascent_watts: 0.0
+  energy_ascent_joules: 0.0
+  pwr_rr_watts: 0.0
+  energy_rr_joules: 0.0
+  pwr_whl_inertia_watts: 0.0
+  energy_whl_inertia_joules: 0.0
+  pwr_brake_watts: 0.0
+  energy_brake_joules: 0.0
+  cyc_met: true
+  cyc_met_overall: true
+  speed_ach_meters_per_second: 0.0
+  dist_meters: 0.0
+  grade_curr: 0.0
+  elev_curr_meters: 0.0
+  air_density_kilograms_per_cubic_meter: 0.0
+  mass_kilograms: .nan
+history:
+  i: []
+  time_seconds: []
+  pwr_prop_fwd_max_watts: []
+  pwr_prop_bwd_max_watts: []
+  pwr_tractive_watts: []
+  pwr_tractive_for_cyc_watts: []
+  energy_tractive_joules: []
+  pwr_aux_watts: []
+  energy_aux_joules: []
+  pwr_drag_watts: []
+  energy_drag_joules: []
+  pwr_accel_watts: []
+  energy_accel_joules: []
+  pwr_ascent_watts: []
+  energy_ascent_joules: []
+  pwr_rr_watts: []
+  energy_rr_joules: []
+  pwr_whl_inertia_watts: []
+  energy_whl_inertia_joules: []
+  pwr_brake_watts: []
+  energy_brake_joules: []
+  cyc_met: []
+  cyc_met_overall: []
+  speed_ach_meters_per_second: []
+  dist_meters: []
+  grade_curr: []
+  elev_curr_meters: []
+  air_density_kilograms_per_cubic_meter: []
+  mass_kilograms: []

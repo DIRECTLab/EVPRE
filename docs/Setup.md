@@ -1,9 +1,9 @@
 # Setup
-The various pieces of software that the Electric Vehicle Range Prediction Project uses are in python.  In order to run this, the machine running it must have python version 3.10.  In the next few sections we will be going over all dependencies that the software requires and how to install them.
+The various pieces of software that the Electric Vehicle Range Prediction Project uses are in python.  In order to run this, the machine running it must have python version 3.10.  In the next few sections we will be going over all dependencies that the software requires and how to install them. You should also make a `.env` file in the root directory of this project containing the API keys. 
 
 ## Auto-Installation
 The FASTSim model relies on python version 3.10. It is recommended to build and install everything within a conda environment.
-Once inside the conda environment run `pip install -r requirements.txt`. This will install all of the dependancies required for the application.
+Once inside the conda environment run `pip install -r requirements.txt`. This will install all of the dependancies required for the application except for Fiona and gdal. You need to run `conda install -c conda-forge gdal fiona` within your conda environment for these two packages.
 
 ## Manual-Installation
 

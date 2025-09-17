@@ -6,7 +6,7 @@ from ipyleaflet import *
 from shapely.geometry import LineString, mapping
 from route_estimator.models.simple_energy_model import ev_energy_model
 from route_estimator.models.fastsim_model import fastsim_energy_model
-from weather import get_weather_data
+from route_estimator.weather.weather import get_weather_data
 
 
 class RouteEstimator:
