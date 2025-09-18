@@ -46,7 +46,7 @@ NISSANLEAF30KWH2016 = {
 
 class Config:
 
-    def __init__(self, model=SIMPLEMODEL, vehicle_config_dict=FORDFOCUSELECTRIC2012):
+    def __init__(self, model=SIMPLEMODEL, vehicle_config_dict=CHEVSPARK2016):
         load_dotenv()
         self.vehicle_config = vehicle_config_dict
 
@@ -57,10 +57,13 @@ class Config:
             print("Invalid model selected, defaulting to simple model")
             self.model = SIMPLEMODEL
 
+        # FASTSim vehicle configuration-----------------------
+        self.fastsim_vehicle_yaml = "/home/zacmaughan/shared-repos/EVPRE/route_estimator/models/vehicles/2016 CHEVROLET Spark EV.yaml"
+
         # Map and Graph Configuration------------------------
         self.starting_coord = (41.740563, -111.813910)
         # May need to increase for full range estimate
-        self.distance = 20000
+        self.distance = 20_000
         self.default_edge_weight = "length"
 
         # API keys--------------------------------------------
@@ -80,7 +83,7 @@ class Config:
         # see fastsim_vehicles.py for details
 
         # The location for the CSV that holds the fastsim vehicle data
-        self.fastsim_vehicle_csv_path = str(
-            list(pathlib.Path(os.getcwd()).rglob('*fastsim_vehicles.csv'))[0])
+        # self.fastsim_vehicle_csv_path = str(
+        #     list(pathlib.Path(os.getcwd()).rglob('*fastsim_vehicles.csv'))[0])
 
-        self.fastsim_vehicle_csv_index = vehicle_config_dict["fastsimIndex"]
+        # self.fastsim_vehicle_csv_index = vehicle_config_dict["fastsimIndex"]

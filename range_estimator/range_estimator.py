@@ -52,7 +52,7 @@ class RangeEstimator:
         batch_size = 512
         total_calls = math.ceil(num_nodes / batch_size)
         print(f"Number of Google API calls needed for elevation data: {total_calls}")
-        return ox.add_node_elevations_google(graph, google_API_key)
+        return ox.add_node_elevations_google(graph, api_key=google_API_key)
 
 
     def get_graph(self):

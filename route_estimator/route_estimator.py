@@ -2,6 +2,7 @@ import networkx as nx
 import osmnx as ox
 import geopandas as gpd
 import numpy as np
+import math
 from ipyleaflet import *
 from shapely.geometry import LineString, mapping
 from route_estimator.models.simple_energy_model import ev_energy_model
@@ -33,9 +34,9 @@ class RouteEstimator:
 
         if config.model == "FASTSIM":
             # Fastsim model
-            print("JITing model, please wait...")
+            print("Calculating FASTSim Model, please wait...")
             self.vehicle = fastsim_energy_model(
-                config.fastsim_vehicle_csv_path, config.fastsim_vehicle_csv_index)
+                config.fastsim_vehicle_yaml)
         else:
             # default simple energy model vehicle
             self.vehicle = ev_energy_model(
@@ -81,7 +82,7 @@ class RouteEstimator:
         batch_size = 512
         total_calls = math.ceil(num_nodes / batch_size)
         print(f"Number of Google API calls needed for elevation data: {total_calls}")
-        return ox.add_node_elevations_google(graph, google_API_key)
+        return ox.add_node_elevations_google(graph, api_key=google_API_key)
 
     def get_graph(self):
         try:
