@@ -17,7 +17,8 @@ class RouteEstimator:
         self.weather_key = config.weather_key
         self.distance = config.distance
         self.edge_weight = config.default_edge_weight
-        #used for map compare mode where three lines are drawn
+        
+        # used for map compare mode where three lines are drawn
         self.compare_mode = False
         
         self.config = config
