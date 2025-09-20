@@ -65,8 +65,8 @@ class Config:
 
         # May need to increase for full range estimate
         # Unites are in meters
-        self.distance = 20_000
-        
+        self.distance = 1_000
+
         self.default_edge_weight = "length"
 
         # API keys--------------------------------------------
