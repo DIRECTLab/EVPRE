@@ -61,7 +61,7 @@ class Config:
         self.fastsim_vehicle_yaml = "/home/zacmaughan/shared-repos/EVPRE/route_estimator/models/vehicles/2016 CHEVROLET Spark EV.yaml"
 
         # Map and Graph Configuration------------------------
-        self.starting_coord = (41.740563, -111.813910)
+        self.starting_coord = (41.760167, -111.816973)
 
         # May need to increase for full range estimate
         # Unites are in meters

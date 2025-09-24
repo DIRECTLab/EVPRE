@@ -99,16 +99,25 @@ class RouteEstimator:
 
     def handle_change_location(self, event, marker):
         event_owner = event['owner']
-        event_owner.nearest_node = ox.get_nearest_node(
-            self.graph, event_owner.location)
-        marker.neares_node = ox.get_nearest_node(self.graph, marker.location)
+        # event_owner.nearest_node = ox.get_nearest_node(
+        #     self.graph, event_owner.location)
+        # marker.nearest_node = ox.get_nearest_node(self.graph, marker.location)
+
+        print(type(event_owner.location))
+        print(event_owner.location)
+        event_owner.nearest_node = ox.distance.nearest_nodes(
+            self.graph, event_owner.location[0], event_owner.location[1]
+        )
+        marker.nearest_node = ox.distance.nearest_nodes(
+            self.graph, marker.location[0], marker.location[1]
+        )
         
         if self.compare_mode:
-            self.handle_compare_mode(event_owner.nearest_node, marker.neares_node)
+            self.handle_compare_mode(event_owner.nearest_node, marker.nearest_node)
         else:
             
             shortest_path = nx.bellman_ford_path(
-                self.graph, event_owner.nearest_node, marker.neares_node, weight=self.edge_weight)
+                self.graph, event_owner.nearest_node, marker.nearest_node, weight=self.edge_weight)
 
             if len(self.path_layer_list) == 1:
                 self.m.remove_layer(self.path_layer_list[0])
