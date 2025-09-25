@@ -51,7 +51,11 @@ class ev_energy_model:
         # the weather api returns it in degrees. no need to convert
         # wind_heading = self.convert_heading(wind_h)
         wind_heading = wind_h
-        wind_heading -= car_heading
+        if wind_heading is None:
+            print("Wind_heading is none, setting to 0")
+            wind_heading = 0
+        else:
+            wind_heading -= car_heading
 
         wind_speed = v_car - v_wind * cos(radians(wind_heading))
 

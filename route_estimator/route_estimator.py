@@ -99,17 +99,14 @@ class RouteEstimator:
 
     def handle_change_location(self, event, marker):
         event_owner = event['owner']
-        # event_owner.nearest_node = ox.get_nearest_node(
-        #     self.graph, event_owner.location)
-        # marker.nearest_node = ox.get_nearest_node(self.graph, marker.location)
 
-        print(type(event_owner.location))
+        # print(type(event_owner.location))
         print(event_owner.location)
         event_owner.nearest_node = ox.distance.nearest_nodes(
-            self.graph, event_owner.location[0], event_owner.location[1]
+            self.graph, event_owner.location[1], event_owner.location[0]
         )
         marker.nearest_node = ox.distance.nearest_nodes(
-            self.graph, marker.location[0], marker.location[1]
+            self.graph, marker.location[1], marker.location[0]
         )
         
         if self.compare_mode:

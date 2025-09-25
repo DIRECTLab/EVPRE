@@ -8,7 +8,8 @@ def get_weather_data(lat, lon, weather_api_key):
         "https://api.openweathermap.org/data/2.5/weather?", params=params)
     weatherResponse = weatherRequest.json()  # Converts into type 'dict'
 
-    wind_heading = weatherResponse['wind']['deg']
+    # wind_heading = weatherResponse['wind']['deg']
+    wind_heading = (weatherResponse.get('wind', {})).get('deg', 0)
     temperature = (weatherResponse.get('main')).get('temp')
     humidity = (weatherResponse.get('main')).get('humidity')
     visibility = weatherResponse.get('visibility')
