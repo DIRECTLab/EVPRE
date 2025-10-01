@@ -46,9 +46,9 @@ class fastsim_energy_model:
         cyc_secs = np.array([x for x in range(len(cyc_mps))])
         cyc_grade = np.array([grade for x in range(len(cyc_mps))])
         cycle_dict = {
-            'cycSecs': cyc_secs,
-            'cycMps': cyc_mps,
-            'cycGrade': cyc_grade
+            'time_seconds': np.array(cyc_secs).tolist(),
+            'speed_mps': np.array(cyc_mps).tolist(),
+            'grade': np.array(cyc_grade).tolist()
         }
         cyc = fs.Cycle.from_pydict(cycle_dict)
 
@@ -56,7 +56,7 @@ class fastsim_energy_model:
         veh = fs.Vehicle.from_file(self.fastsim_vehicle_yaml)
 
         sim = fs.SimDrive(veh, cyc)
-        sim.sim_drive()
+        sim.walk()
         sim_power_kwh = sim.essCurKwh[0] - sim.essCurKwh[-1]
         
         print(f'Sim calculated kWh loss: {sim_power_kwh}')

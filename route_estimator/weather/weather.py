@@ -9,7 +9,7 @@ def get_weather_data(lat, lon, weather_api_key):
     weatherResponse = weatherRequest.json()  # Converts into type 'dict'
 
     # wind_heading = weatherResponse['wind']['deg']
-    wind_heading = (weatherResponse.get('wind', {})).get('deg', 0)
+    wind_heading = (weatherResponse.get('wind')).get('deg', 0)
     temperature = (weatherResponse.get('main')).get('temp')
     humidity = (weatherResponse.get('main')).get('humidity')
     visibility = weatherResponse.get('visibility')
