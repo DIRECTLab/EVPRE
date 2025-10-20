@@ -2,8 +2,7 @@
 The various pieces of software that the Electric Vehicle Range Prediction Project uses are in python.  In order to run this, the machine running it must have python version 3.10.  In the next few sections we will be going over all dependencies that the software requires and how to install them. You should also make a `.env` file in the root directory of this project containing the API keys. 
 
 ## Auto-Installation
-The FASTSim model relies on python version 3.10. It is recommended to build and install everything within a conda environment.
-Once inside the conda environment run `pip install -r requirements.txt`. This will install all of the dependancies required for the application except for Fiona and gdal. You need to run `conda install -c conda-forge gdal fiona` within your conda environment for these two packages.
+It is recommended to build and install everything within a conda environment with python=3.10. Once inside the conda environment run `pip install -r requirements.txt`. This will install all of the dependancies required for the application except for Fiona, gdal, and FASTSim. Please refer to [Fiona Installation](#fiona-installation), [GDAL Installation](#gdal-installation), and [FASTSim](#fastsim-installation) to correctly install these packages. 
 
 ## Manual-Installation
 
@@ -57,6 +56,10 @@ Ipyleaflet is talked about in the dependencies section.  If you want more inform
 [Ipyleaflet Installer](https://ipyleaflet.readthedocs.io/en/latest/installation.html) 
 
 ### FASTSim Installation
-FASTSim is talked about in the dependencies section.  If you want more information on it, reference that.  However, if you want to install it, then run `pip install fastsim`
+For information of what FASTSim is, then click here to go to the Dependencies report: [FASTSim](./Dependencies.md). If you want to install it, then you are going to need to have the Rust toolchain and the FASTSim Github repo cloned. Once both have been installed, then in the terminal run `sh build_and_test.sh` inside of the FASTSim repo to install FASTSim and test all of its depenedencies.
+
+[FASTSim Github](https://github.com/NREL/fastsim)
+
+[Rust Toolchain](https://rust-lang.org/tools/install/)
 
 [More Information on FASTSim](https://www.nrel.gov/transportation/data-tools.html) 
