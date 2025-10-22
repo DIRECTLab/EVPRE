@@ -8,7 +8,7 @@ FASTSIMMODEL = "FASTSIM"
 # The index of the vehicle in the fastsim_vehicles.csv, 1 indexed
 # 1: 2012 Ford Focus Electric
 # 2: 2016 CHEVROLET Spark EV
-# 3: 2016 Leaf 24 kWh
+# 3: 2016 Nissan Leaf 24 kWh
 # 4: 2016 Nissan Leaf 30 kWh
 
 FORDFOCUSELECTRIC2012 = {
