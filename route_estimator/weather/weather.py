@@ -16,12 +16,11 @@ def get_weather_data(lat, lon, weather_api_key):
     wind_speed = (weatherResponse.get('wind')).get('speed')
 
     weather_dict = {
+        "wind_heading": wind_heading,
         "temperature": temperature,
         "humidity": humidity,
         "visibility": visibility,
-        "wind_speed": wind_speed,
-        "wind_heading": wind_heading
-
+        "wind_speed": wind_speed
     }
 
     return weather_dict

@@ -90,8 +90,12 @@ def equalizer_constant(energy1, energy2):
         change = 50
         while difference > 0.009 or difference < -0.009:
             add_diff = (energy2[x] * (equalizer[x] + change)) - energy1[x]
-            sub_diff = (energy2[x] * (equalizer[x] - change) - energy1[x]) if (energy2[x] * (
-                equalizer[x] - change) - energy1[x]) > 0 else (energy2[x] * (equalizer[x] - change) - energy1[x]) * -1
+            
+            if (energy2[x] * (equalizer[x] - change) - energy1[x]) > 0:
+                sub_diff = (energy2[x] * (equalizer[x] - change) - energy1[x])
+            else:
+                sub_diff = (energy2[x] * (equalizer[x] - change) - energy1[x]) * -1
+
             if sub_diff < add_diff:
                 difference = sub_diff
                 equalizer[x] -= change

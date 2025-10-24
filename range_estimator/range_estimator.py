@@ -87,7 +87,7 @@ class RangeEstimator:
         node_colors = {}
 
 
-        center_node = ox.distance.nearest_nodes(self.graph, self.starting_coord[0], self.starting_coord[1], return_dist=False)
+        # center_node = ox.distance.nearest_nodes(self.graph, self.starting_coord[0], self.starting_coord[1], return_dist=False)
         gdf_nodes = ox.graph_to_gdfs(self.graph, edges=False)
         x, y = gdf_nodes["geometry"].unary_union.centroid.xy
         center_node = ox.distance.nearest_nodes(self.graph, x[0], y[0])
@@ -128,7 +128,9 @@ class RangeEstimator:
             zorder=-1,
         )
 
+        # This sectiopn uses matplotlib and descartes to plot the isochrones
         # for polygon, fc in zip(isochrone_polys, iso_colors):
         #     patch = PolygonPatch(polygon, fc=fc, ec="none", alpha=0.4, zorder=-1)
         #     ax.add_patch(patch)
+        
         plt.show()

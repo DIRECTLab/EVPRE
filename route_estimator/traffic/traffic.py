@@ -1,12 +1,12 @@
 import requests
 
-def get_traffic_data(lat, lon):
-    traffic_api_key = "WyzLeVkyIi34SlO4nC2gt1yldAO76OMe"
+def get_traffic_data(lat, lon, traffic_api_key):
     coordinates = str(lat) + "," + str(lon)
     params = {"key": traffic_api_key, "point": coordinates}
     trafficRequest = requests.get("https://api.tomtom.com/traffic/services/4/flowSegmentData/relative0/10/json", params=params)
     trafficResponse = trafficRequest.json() #Converts into type 'dict'
     if 'error' in trafficResponse:
+        print("Traffic API Error: " + trafficResponse['error']['message'])
         traffic_dict = {
             "roadType": "FRC6",
             "currentRoadSpeed": 40,

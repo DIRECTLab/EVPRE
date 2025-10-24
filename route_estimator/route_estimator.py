@@ -205,7 +205,7 @@ class RouteEstimator:
         energy_consumed = []
 
         # For each row, grab the required value, compute the energy, and add to the energy list
-        for index, row in graphDF[1].iterrows():
+        for __, row in graphDF[1].iterrows():
             speed_mps = row['speed_kph'] / 3.6
             grade = row['grade']
             length = row['length']
@@ -237,15 +237,15 @@ class RouteEstimator:
             self.starting_coord[0], self.starting_coord[1], self.weather_key)
 
         # For each row, grab the required value, compute the energy, and add to the energy list
-        for index, row in graphDF[1].iterrows():
-            speed = row['speed_kph']
+        for __, row in graphDF[1].iterrows():
+            speed_mps = row['speed_kph'] / 3.6
             bearing = row['bearing']
             grade = row['grade']
             length = row['length']
             wind_speed = current_weather['wind_speed']
             wind_heading = current_weather['wind_heading']
             energy_consumption = self.vehicle.energy_consumption(
-                grade, speed/3.6, 0, wind_speed, car_heading=bearing, wind_h=wind_heading, length=length)
+                grade, speed_mps, 0, wind_speed, car_heading=bearing, wind_h=wind_heading, length=length)
             energy_consumed.append(energy_consumption)
 
         # create a new column on the graphDF
